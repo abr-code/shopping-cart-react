@@ -1,0 +1,14 @@
+.products-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  text-align: center;
+}
+
+.product-list {
+  background: hsl(40, 2%, 54%);
+  border-radius: 5px;
+}
+.product-list_img {
+  width: 180px;
+}
