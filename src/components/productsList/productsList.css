@@ -2,13 +2,27 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 10px;
-  text-align: center;
 }
 
 .product-list {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: space-evenly;
+  text-align: center;
   background: hsl(40, 2%, 54%);
   border-radius: 5px;
 }
 .product-list_img {
   width: 180px;
+  height: 180px;
+}
+
+.product-list_addToCart {
+  padding: 5px;
+  display: flex;
+  justify-items: center;
+  border-radius: 5px;
+  background: blue;
 }

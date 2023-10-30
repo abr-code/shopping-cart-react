@@ -4,6 +4,8 @@ import { ProductsList } from "./components/productsList/ProductsList";
 import { FilterBar } from "./components/FilterBar/FilterBar";
 import { useContext } from "react";
 import { FiltersCtx } from "./context/contexts";
+import { Cart } from "./components/cart/Cart";
+import { CartProvider } from "./context/CartProvider";
 
 const filterBy = (filters, array) => {
   const { price, category } = filters;
@@ -17,13 +19,15 @@ const filterBy = (filters, array) => {
 
 function App() {
   const filters = useContext(FiltersCtx);
-  const { price } = filters;
   const list = filterBy(filters, products);
   return (
     <>
-      <h1 className="shopping-cart-title">Shopping cart 🛒 {price}</h1>
-      <FilterBar />
-      <ProductsList products={list} />
+      <CartProvider>
+        <Cart />
+        <h1 className="shopping-cart-title">Shopping cart 🛒 </h1>
+        <FilterBar />
+        <ProductsList products={list} />
+      </CartProvider>
     </>
   );
 }
