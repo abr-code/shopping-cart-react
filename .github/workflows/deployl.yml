@@ -1,0 +1,47 @@
+name: deploy to github pages
+
+on:
+  push:
+    branches: ["main"]
+
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ci-{{github.ref}}
+
+jobs:
+  preparing_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+      - name: setup bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: install dependencies
+        run: bun install
+      - name: build proyect
+        run: bun run build
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+        with:
+          path: ./dist/
+
+      # Deployment job
+  deploy:
+    needs: preparing_build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

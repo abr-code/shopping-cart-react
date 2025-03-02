@@ -1,0 +1,41 @@
+.productCard {
+  width: 310px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.productCard-title,
+.productCard-price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 4px 0px;
+}
+
+.productCard-description {
+  text-wrap: balance;
+  font-size: 2rem;
+  height: 8rem;
+  overflow: hidden;
+}
+.productCard-image {
+  aspect-ratio: 4/3;
+}
+
+.productCard-button {
+  /*font-size: 2rem;*/
+  /*padding: 0.4rem;*/
+  width: 4rem;
+  height: 4rem;
+}
+
+.productCard-buttonAdd {
+  background-color: royalblue;
+}
+.productCard-buttonDelete {
+  background-color: orangered;
+}

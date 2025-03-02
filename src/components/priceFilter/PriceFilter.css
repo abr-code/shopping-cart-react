@@ -1,0 +1,9 @@
+.priceFilter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.priceFilter-label {
+  font-size: 2rem;
+}

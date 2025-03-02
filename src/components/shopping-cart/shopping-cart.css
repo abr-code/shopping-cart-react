@@ -1,0 +1,117 @@
+.labelCheckbox {
+  z-index: 50;
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  margin: 4px 12px;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: royalblue;
+}
+
+.shoppingCart-container {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  width: 26rem;
+  min-height: 50rem;
+  margin: 0px 8px;
+  padding: 12px;
+  display: none;
+  /*background-color: royalblue;*/
+  background-color: white;
+  border: 2px solid black;
+  box-shadow: 4px 4px 20px black;
+}
+.shoppingCart-header {
+  font-size: 3rem;
+  width: 70%;
+}
+
+.labelCheckbox ~ input:checked ~ .shoppingCart-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.shoppingCart-card {
+  margin-top: 8px;
+  display: flex;
+  /*align-items: center;*/
+  justify-content: space-between;
+  min-width: 18rem;
+  min-height: 6rem;
+
+  gap: 4px;
+}
+
+.shoppingCart-info-container {
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.shoppingCart-title {
+  font-size: 1.5rem;
+  text-wrap: balance;
+}
+
+.shoppingCart-deleteItem {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: #828081;
+  border: none;
+}
+.shoppingCart-card span {
+  font-size: 1.5rem;
+}
+.shoppingCart-deleteItem svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.shoppingCart-quantity {
+  font-size: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  background-color: whitesmoke;
+}
+
+.shoppingCart-image {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.shoppingCart-price-container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 4px;
+}
+.shoppingCart-price {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.shoppingCart-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.shoppingCart-button {
+  width: 2rem;
+  height: 2rem;
+}
+
+.shoppingCart-clear {
+  font-size: 2rem;
+  margin-top: auto;
+}
