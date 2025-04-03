@@ -1,26 +1,31 @@
 import "./App.css";
-import { ProductList } from "./components/productList/ProductList";
-import { CategoriesFilter } from "./components/categoriesFilter/CategoriesFilter.js";
-import { PriceFilter } from "./components/priceFilter/PriceFilter.js";
-import { ShoppingCart } from "./components/shopping-cart/shopping-cart.js";
-import { ShoppingCartContext } from "./context/shoppingCartContext.js";
+import { StoreLayout } from "./features/store/layout/StoreLayout.tsx";
+import { LoginPage } from "./features/auth/layouts/logginPage/LoginPage.tsx";
+import { RegisterPage } from "./features/auth/layouts/registerPage/RegisterPage.tsx";
+import { ShoppingCartContext } from "./context/shoppingCartContext.tsx";
+
+import { createBrowserRouter, RouterProvider } from "react-router";
+
+const router = createBrowserRouter([
+  {
+    path: "/shopping-cart-react",
+    Component: StoreLayout,
+  },
+  {
+    path: "/shopping-cart-react/login",
+    Component: LoginPage,
+  },
+  {
+    path: "/shopping-cart-react/register",
+    Component: RegisterPage,
+  },
+]);
 
 function App() {
   return (
-    <>
-      <header>
-        <h1 className="header-title">Products</h1>
-        <CategoriesFilter />
-        <PriceFilter />
-      </header>
-      <main>
-        <ShoppingCartContext>
-          {/* shopping cart is absolute so can be posision anyware in the layout */}
-          <ShoppingCart />
-          <ProductList />
-        </ShoppingCartContext>
-      </main>
-    </>
+    <ShoppingCartContext>
+      <RouterProvider router={router} />
+    </ShoppingCartContext>
   );
 }
 
