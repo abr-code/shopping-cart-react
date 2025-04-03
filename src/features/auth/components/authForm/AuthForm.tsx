@@ -1,19 +1,27 @@
 import "./AuthForm.css";
-import { setAccesToken } from "../../../../token/accessToken.ts";
+import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { setAccesToken, getAccesToken } from "../../../../token/accessToken.ts";
+import { ShoppingCartctxType } from "../../../../types/shoppingCartCtxType.ts";
+import { ShoppingCartctx } from "../../../../context/shoppingCartContext.tsx";
 type Formtype = "Register" | "Login";
 interface AuthFormType {
   formType: Formtype;
 }
 const REGISTER_URL = "http://localhost:3000/api/v1/auth/register";
 const LOGIN_URL = "http://localhost:3000/api/v1/auth/login";
+const GET_CART = "http://localhost:3000/api/v1/cart/getCart";
 
 function AuthForm({ formType }: AuthFormType) {
   const formTitle = formType === "Register" ? "Registrarse" : "Ingresar";
   const fetchUrl = formType === "Register" ? REGISTER_URL : LOGIN_URL;
 
+  const navigate = useNavigate();
+  console.log(ShoppingCartctx);
+  const { setCart } = useContext(ShoppingCartctx) as ShoppingCartctxType;
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log(this.login_email.value);
     const formData = new FormData(event.currentTarget);
     const email = formData.get("login_email");
     const password = formData.get("login_password");
@@ -51,8 +59,19 @@ function AuthForm({ formType }: AuthFormType) {
     });
     if (!responce.ok) return "error";
     const result = await responce.json();
-    console.log(result);
-    setAccesToken(result);
+    console.log(result.accesToken);
+    setAccesToken(result.accesToken);
+    const cartResponse = await fetch(GET_CART, {
+      headers: {
+        Authorization: "Bearer " + getAccesToken(),
+      },
+    });
+    if (!cartResponse.ok) return "error";
+    const cart = await cartResponse.json();
+    console.log(cart);
+    setCart(cart.cart);
+
+    navigate("/shopping-cart-react");
   };
 
   return (
