@@ -2,7 +2,6 @@ import { CategoriesFilter } from "../../../components/categoriesFilter/Categorie
 import { PriceFilter } from "../../../components/priceFilter/PriceFilter";
 import { ProductList } from "../../../components/productList/ProductList";
 import { ShoppingCart } from "../../../components/shopping-cart/shopping-cart";
-import { ShoppingCartContext } from "../../../context/shoppingCartContext";
 
 function StoreLayout() {
   return (
@@ -13,11 +12,9 @@ function StoreLayout() {
         <PriceFilter />
       </header>
       <main>
-        <ShoppingCartContext>
-          {/* shopping cart is absolute so can be posision anyware in the layout */}
-          <ShoppingCart />
-          <ProductList />
-        </ShoppingCartContext>
+        {/* shopping cart is absolute so can be posision anyware in the layout */}
+        <ShoppingCart />
+        <ProductList />
       </main>
     </>
   );
