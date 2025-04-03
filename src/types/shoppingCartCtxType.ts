@@ -12,4 +12,5 @@ export interface ShoppingCartctxType {
   increaseQuantity(productId: string): void;
   decreaseQuantity(productId: string): void;
   clearCart(): void;
+  setCart(cart: ProductCart[]): void;
 }

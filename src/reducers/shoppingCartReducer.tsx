@@ -6,11 +6,25 @@ type ProductCart = {
   price: number;
 };
 
+type ActionType = {
+  type:
+    | "addToCart"
+    | "deleteFromCart"
+    | "increaseQuantity"
+    | "decreaseQuantity"
+    | "clearCart"
+    | "setCart";
+  payload: ProductCart | string | ProductCart[];
+};
+
 function shoppingCartReducer(
   cartState: ProductCart[],
-  action: { type: string; payload: ProductCart | string },
-) {
+  action: ActionType,
+): ProductCart[] {
   const { id, title, image, quantity, price } = action.payload as ProductCart;
+
+  //used a  copy beacuse of using the cartState lead to inconsistency
+  //even withot modifying it
   const currentState = structuredClone(cartState);
   let newState = [];
   switch (action.type) {
@@ -41,7 +55,16 @@ function shoppingCartReducer(
       break;
     case "clearCart":
       return [];
-
+    case "setCart":
+      if (
+        typeof action.payload === "string" ||
+        !Array.isArray(action.payload)
+      ) {
+        return currentState;
+      }
+      console.log("reducer setCart");
+      console.log(action.payload);
+      return action.payload;
       break;
     default:
       return currentState;

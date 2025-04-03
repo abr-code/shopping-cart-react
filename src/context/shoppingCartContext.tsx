@@ -14,6 +14,7 @@ export function ShoppingCartContext({ children }: { children: ReactNode }) {
     increaseQuantity,
     decreaseQuantity,
     clearCart,
+    setCart,
   } = useShoppingCart();
 
   return (
@@ -25,6 +26,7 @@ export function ShoppingCartContext({ children }: { children: ReactNode }) {
         increaseQuantity,
         decreaseQuantity,
         clearCart,
+        setCart,
       }}
     >
       {children}
