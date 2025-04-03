@@ -1,9 +1,10 @@
-import { Login } from "../components/AuthForm";
+import { AuthForm } from "../components/authForm/AuthForm.tsx";
 import "./LoginLayout.css";
+
 function LoginLayout() {
   return (
     <div className="login_layout-container">
-      <Login />
+      <AuthForm formType="Login" />
     </div>
   );
 }
