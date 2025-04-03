@@ -3,7 +3,7 @@ import "./LoginPage.tsx";
 function LoginPage() {
   return (
     <div className="login_layout-container">
-      <AuthForm formtype="Login" fetchUrl=" " />
+      <AuthForm formType="Login" />
     </div>
   );
 }
