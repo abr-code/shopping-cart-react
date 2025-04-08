@@ -5,6 +5,7 @@ import { RegisterPage } from "./features/auth/layouts/registerPage/RegisterPage.
 import { ShoppingCartContext } from "./context/shoppingCartContext.tsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router";
+import { NavBar } from "./features/nav-bar/NavBar.tsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ShoppingCartContext>
+      <NavBar />
       <RouterProvider router={router} />
     </ShoppingCartContext>
   );

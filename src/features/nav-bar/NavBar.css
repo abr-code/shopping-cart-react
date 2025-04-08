@@ -1,0 +1,15 @@
+.navBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 8rem; /*sujeto a cambios. creado para evitar conflictos con el cart */
+  height: 8rem;
+  background-color: lavender;
+}
+
+.navBar ul {
+  display: flex;
+  font-size: 4rem;
+  list-style: none;
+  gap: 8px;
+}
