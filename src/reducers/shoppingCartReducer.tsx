@@ -6,69 +6,50 @@ type ProductCart = {
   price: number;
 };
 
-type ActionType = {
-  type:
-    | "addToCart"
-    | "deleteFromCart"
-    | "increaseQuantity"
-    | "decreaseQuantity"
-    | "clearCart"
-    | "setCart";
-  payload: ProductCart | string | ProductCart[];
-};
+type ProductCartId = Pick<ProductCart, "id">;
+type ActionType =
+  | { type: "addToCart"; payload: ProductCart }
+  | { type: "deleteFromCart"; payload: ProductCartId }
+  | { type: "increaseQuantity"; payload: ProductCartId }
+  | { type: "decreaseQuantity"; payload: ProductCartId }
+  | { type: "clearCart"; payload: null }
+  | { type: "setCart"; payload: { cart: ProductCart[] } };
 
 function shoppingCartReducer(
   cartState: ProductCart[],
   action: ActionType,
 ): ProductCart[] {
-  const { id, title, image, quantity, price } = action.payload as ProductCart;
-
   //used a  copy beacuse of using the cartState lead to inconsistency
   //even withot modifying it
   const currentState = structuredClone(cartState);
   let newState = [];
+  // if there is no payload and is not clearCart
+  if (action.type !== "clearCart" && !action.payload) return cartState;
+
   switch (action.type) {
     case "addToCart":
-      newState = [...currentState, { id, title, image, quantity, price }];
-      return newState;
-      break;
+      return [...currentState, action.payload];
     case "deleteFromCart":
-      newState = currentState.filter((item) => item.id !== action.payload);
-      return newState;
-      break;
+      return currentState.filter((item) => item.id !== action.payload.id);
     case "increaseQuantity":
-      newState = currentState.map((product) => {
-        if (product.id === action.payload) product.quantity++;
+      return currentState.map((product) => {
+        if (product.id === action.payload.id) product.quantity++;
         return product;
       });
 
-      return newState;
-
-      break;
     case "decreaseQuantity":
       newState = currentState.map((product) => {
-        if (product.id === action.payload && product.quantity > 1)
+        if (product.id === action.payload.id && product.quantity > 1)
           product.quantity--;
         return product;
       });
       return newState;
-      break;
     case "clearCart":
       return [];
     case "setCart":
-      if (
-        typeof action.payload === "string" ||
-        !Array.isArray(action.payload)
-      ) {
-        return currentState;
-      }
-      console.log("reducer setCart");
-      console.log(action.payload);
-      return action.payload;
-      break;
+      return action.payload.cart;
     default:
       return currentState;
-      break;
   }
 }
 

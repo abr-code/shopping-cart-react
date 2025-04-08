@@ -53,25 +53,25 @@ export function useShoppingCart() {
     });
   };
   const deleteFromCart = (productId: string) => {
-    dispatch({ type: "deleteFromCart", payload: productId });
+    dispatch({ type: "deleteFromCart", payload: { id: productId } });
   };
   const increaseQuantity = (productId: string) => {
-    dispatch({ type: "increaseQuantity", payload: productId });
+    dispatch({ type: "increaseQuantity", payload: { id: productId } });
   };
 
   const decreaseQuantity = (productId: string) => {
-    dispatch({ type: "decreaseQuantity", payload: productId });
+    dispatch({ type: "decreaseQuantity", payload: { id: productId } });
   };
   const clearCart = () => {
     // setCart([]);
-    dispatch({ type: "clearCart", payload: "" });
+    dispatch({ type: "clearCart", payload: null });
   };
 
   const setCart = (userCart: ProductCart[]) => {
     console.log("setCart");
     console.log(userCart);
 
-    dispatch({ type: "setCart", payload: userCart });
+    dispatch({ type: "setCart", payload: { cart: userCart } });
   };
 
   return {
