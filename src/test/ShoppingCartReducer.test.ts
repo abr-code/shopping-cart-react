@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { it, expect, describe } from "vitest";
 import { shoppingCartReducer } from "../reducers/shoppingCartReducer.tsx"; // Replace with your actual file path
 

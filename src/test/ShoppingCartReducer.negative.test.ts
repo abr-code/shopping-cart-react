@@ -1,10 +1,12 @@
+//@ts-nocheck
 import { test, expect, describe } from "vitest";
 import { shoppingCartReducer } from "../reducers/shoppingCartReducer.tsx"; // Replace with your actual file path
+import { ProductCart } from "../types/productCartType.ts";
 
 describe("Negative Space Tests for shoppingCartReducer", () => {
   // 3. Test: Unknown action type
   test("should return current state for an invalid action type", () => {
-    const initialState = [];
+    const initialState: ProductCart[] = [];
     const action = { type: "invalidAction", payload: null };
 
     const result = shoppingCartReducer(initialState, action);
