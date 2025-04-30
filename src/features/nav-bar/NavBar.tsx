@@ -26,7 +26,6 @@ function NavBar() {
     });
     if (!responce.ok) return "error";
     logoutUser();
-    const result = await responce.json();
   };
   return (
     <nav className="navBar">
