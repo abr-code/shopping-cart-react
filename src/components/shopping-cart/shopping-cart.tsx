@@ -21,7 +21,12 @@ export function ShoppingCart() {
       <label htmlFor="cartCheckbox" className="labelCheckbox">
         <CartIcon />
       </label>
-      <input type="checkbox" id="cartCheckbox" hidden />
+      <input
+        type="checkbox"
+        aria-label="cartCheckbox"
+        id="cartCheckbox"
+        hidden
+      />
       <div className="shoppingCart-container">
         <h2 className="shoppingCart-header">Shopping Cart</h2>
         {cart.map((product) => {
