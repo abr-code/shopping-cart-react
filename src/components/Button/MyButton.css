@@ -1,8 +1,8 @@
 .myButton {
   font-size: 2rem;
   font-weight: bold;
-  width: 8rem;
   height: 4rem;
+  padding: 8px;
   border-radius: 8px;
   border: transparent;
   background-color: gray;
