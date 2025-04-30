@@ -1,10 +1,12 @@
-type ProductCart = {
-  id: string;
-  title: string;
-  image: string;
-  quantity: number;
-  price: number;
-};
+import { ProductCart } from "../types/productCartType";
+
+// type ProductCart = {
+//   id: string;
+//   title: string;
+//   image: string;
+//   quantity: number;
+//   price: number;
+// };
 
 type ProductCartId = Pick<ProductCart, "id">;
 type ActionType =
