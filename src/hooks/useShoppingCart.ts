@@ -1,11 +1,13 @@
-import { useEffect, useReducer } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import { shoppingCartReducer } from "../reducers/shoppingCartReducer";
-import { getAccesToken } from "../token/accessToken";
+// import { getAccesToken } from "../token/accessToken";
+import { LoginContext, LoginContextType } from "../context/LoginContext";
 import { ProductCart } from "../types/productCartType";
 
 const SET__CART_URL = "http://localhost:3000/api/v1/cart/saveCart";
 export function useShoppingCart() {
   const initialCartState: ProductCart[] = [];
+  const { getAccessToken } = useContext(LoginContext) as LoginContextType;
   // if (localStorage.getItem("cart")) {
   //   // initialCartState = JSON.parse(localStorage.getItem("cart") as string);
   //   //
@@ -27,14 +29,16 @@ export function useShoppingCart() {
   // }
 
   const [cart, dispatch] = useReducer(shoppingCartReducer, initialCartState);
+
   useEffect(() => {
+    console.log("useEffect ", getAccessToken());
     // localStorage.setItem("cart", JSON.stringify(cart));
     if (cart.length !== 0) {
       console.log(cart);
       fetch(SET__CART_URL, {
         method: "POST",
         headers: {
-          Authorization: "Bearer " + getAccesToken(),
+          Authorization: "Bearer " + getAccessToken(),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({

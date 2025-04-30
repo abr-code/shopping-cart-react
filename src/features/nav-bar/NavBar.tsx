@@ -1,17 +1,49 @@
 import "./NavBar.css";
+import { MyButton } from "../../components/Button/MyButton";
+import { useNavigate } from "react-router";
+import { LoginContext, LoginContextType } from "../../context/LoginContext";
+import { useContext } from "react";
+
+const LOGOUT_URL = "http://localhost:3000/api/v1/auth/logout";
 
 function NavBar() {
-  const islogged = false;
+  const { isLogged, logoutUser } = useContext(LoginContext) as LoginContextType;
+  const navigate = useNavigate();
+  // const islogged = false;
+  const onClickRegister = () => {
+    navigate("/shopping-cart-react/register");
+  };
+  const onClickLogin = () => {
+    navigate("/shopping-cart-react/login");
+  };
+  const onClickLogout = async () => {
+    // navigate("/shopping-cart-react/");
+    const responce = await fetch(LOGOUT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!responce.ok) return "error";
+    logoutUser();
+    const result = await responce.json();
+  };
   return (
     <nav className="navBar">
-      {islogged ? (
+      {isLogged ? (
         <ul>
-          <li>logout</li>
+          <li>
+            <MyButton text="Cerrar session" onClick={onClickLogout} />
+          </li>
         </ul>
       ) : (
         <ul className="navBar-list">
-          <li className="navBar-listItem">registrarse</li>
-          <li className="navBar-listItem">ingresar</li>
+          <li className="navBar-listItem">
+            <MyButton text="Registrarse" onClick={onClickRegister} />
+          </li>
+          <li className="navBar-listItem">
+            <MyButton text="Ingresar" onClick={onClickLogin} />
+          </li>
         </ul>
       )}
     </nav>

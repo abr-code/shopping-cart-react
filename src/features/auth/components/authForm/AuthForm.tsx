@@ -1,9 +1,14 @@
 import "./AuthForm.css";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
-import { setAccesToken, getAccesToken } from "../../../../token/accessToken.ts";
+// import { setAccesToken, getAccesToken } from "../../../../token/accessToken.ts";
 import { ShoppingCartctxType } from "../../../../types/shoppingCartCtxType.ts";
 import { ShoppingCartctx } from "../../../../context/shoppingCartContext.tsx";
+import {
+  LoginContext,
+  LoginContextType,
+} from "../../../../context/LoginContext.tsx";
+
 type Formtype = "Register" | "Login";
 interface AuthFormType {
   formType: Formtype;
@@ -19,6 +24,9 @@ function AuthForm({ formType }: AuthFormType) {
   const navigate = useNavigate();
   console.log(ShoppingCartctx);
   const { setCart } = useContext(ShoppingCartctx) as ShoppingCartctxType;
+  const { loginUser, setAccessToken, getAccessToken } = useContext(
+    LoginContext,
+  ) as LoginContextType;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,6 +52,7 @@ function AuthForm({ formType }: AuthFormType) {
 
       const data = await responce.json();
       console.log(data);
+      navigate("/shopping-cart-react");
       return;
     }
 
@@ -59,11 +68,12 @@ function AuthForm({ formType }: AuthFormType) {
     });
     if (!responce.ok) return "error";
     const result = await responce.json();
-    console.log(result.accesToken);
-    setAccesToken(result.accesToken);
+    console.log(result.accessToken);
+    setAccessToken(result.accessToken);
+    loginUser(result.accessToken);
     const cartResponse = await fetch(GET_CART, {
       headers: {
-        Authorization: "Bearer " + getAccesToken(),
+        Authorization: "Bearer " + getAccessToken(),
       },
     });
     if (!cartResponse.ok) return "error";
