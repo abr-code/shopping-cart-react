@@ -9,6 +9,10 @@ const LOGOUT_URL = "http://localhost:3000/api/v1/auth/logout";
 function NavBar() {
   const { isLogged, logoutUser } = useContext(LoginContext) as LoginContextType;
   const navigate = useNavigate();
+
+  const handleHomeClick = () => {
+    navigate("/shopping-cart-react");
+  };
   // const islogged = false;
   const onClickRegister = () => {
     navigate("/shopping-cart-react/register");
@@ -32,11 +36,17 @@ function NavBar() {
       {isLogged ? (
         <ul>
           <li>
+            <MyButton text="Home" onClick={handleHomeClick} />
+          </li>
+          <li>
             <MyButton text="Cerrar session" onClick={onClickLogout} />
           </li>
         </ul>
       ) : (
         <ul className="navBar-list">
+          <li>
+            <MyButton text="Home" onClick={handleHomeClick} />
+          </li>
           <li className="navBar-listItem">
             <MyButton text="Registrarse" onClick={onClickRegister} />
           </li>
