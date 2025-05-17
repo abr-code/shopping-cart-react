@@ -14,13 +14,13 @@ function NavBar() {
     navigate("/shopping-cart-react");
   };
   // const islogged = false;
-  const onClickRegister = () => {
+  const handleRegister = () => {
     navigate("/shopping-cart-react/register");
   };
-  const onClickLogin = () => {
+  const handleLogin = () => {
     navigate("/shopping-cart-react/login");
   };
-  const onClickLogout = async () => {
+  const handleLogout = async () => {
     // navigate("/shopping-cart-react/");
     const responce = await fetch(LOGOUT_URL, {
       method: "POST",
@@ -39,7 +39,7 @@ function NavBar() {
             <MyButton text="Home" onClick={handleHomeClick} />
           </li>
           <li>
-            <MyButton text="Cerrar session" onClick={onClickLogout} />
+            <MyButton text="Cerrar session" onClick={handleLogout} />
           </li>
         </ul>
       ) : (
@@ -48,10 +48,10 @@ function NavBar() {
             <MyButton text="Home" onClick={handleHomeClick} />
           </li>
           <li className="navBar-listItem">
-            <MyButton text="Registrarse" onClick={onClickRegister} />
+            <MyButton text="Registrarse" onClick={handleRegister} />
           </li>
           <li className="navBar-listItem">
-            <MyButton text="Ingresar" onClick={onClickLogin} />
+            <MyButton text="Ingresar" onClick={handleLogin} />
           </li>
         </ul>
       )}
